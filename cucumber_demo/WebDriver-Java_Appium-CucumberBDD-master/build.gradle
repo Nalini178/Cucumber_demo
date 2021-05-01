@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'org.testng:testng:6.14.3'
+    compile 'org.seleniumhq.selenium:selenium-java:3.11.0'
+    compile 'org.seleniumhq.selenium:htmlunit-driver:2.36.0'
+    compile 'io.cucumber:cucumber-java:4.7.4'
+    compile 'io.cucumber:cucumber-testng:4.7.4'
+    compile group: 'com.aventstack', name: 'extentreports-cucumber4-adapter', version: '1.0.12'
+    compile group: 'io.appium', name: 'java-client', version: '7.3.0'
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '4.4.1'
+
+}
+
+configurations {
+ 
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+task run() {
+    dependsOn assemble, compileTestJava
+    doLast {
+
+
+        javaexec {
+            if(System.getProperty("os") != null){
+                systemProperty "os", System.getProperty("os")
+            }else{
+                print("Please provide the os details. Ex: -os='<<ios/android/windows>>'")
+            }
+
+            project.delete(files("${projectDir}/target"))
+            systemProperties System.getProperties()
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin','com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:', '--plugin', 'json:target/CucumberReport/CucumberTestReport.json', '--tags',tags, '--plugin', 'pretty', '--threads', '1', '--glue', 'com.example', 'src/main/java/com/example/features']
+        }
+    }
+}

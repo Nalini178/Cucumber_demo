@@ -1,0 +1,59 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2021-05-01T00:55:19.417Z",
+        "line": 4,
+        "name": "Launch the google url in browser",
+        "description": "",
+        "id": "sample-feature-file-to-illustrate-app-and-browser-tests;launch-the-google-url-in-browser",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 36361842401,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I launch the google",
+            "match": {
+              "location": "google.i_launch_the_google()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 811279200,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I verify the title to be Google",
+            "match": {
+              "location": "google.i_verify_the_title_to_be_Google()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@androidBrowser"
+          },
+          {
+            "name": "@iosBrowser"
+          },
+          {
+            "name": "@smoke"
+          }
+        ]
+      }
+    ],
+    "name": "Sample feature file to illustrate app and browser tests",
+    "description": "",
+    "id": "sample-feature-file-to-illustrate-app-and-browser-tests",
+    "keyword": "Feature",
+    "uri": "file:src/main/java/com/example/features/SampleFeature.feature",
+    "tags": []
+  }
+]
